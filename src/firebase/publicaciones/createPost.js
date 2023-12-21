@@ -9,7 +9,6 @@ import {addDoc, collection, getFirestore } from "firebase/firestore";
 export const createPost = async (publication) => {
     try {
         await addDoc(collection(db, "publications"), publication);
-        console.log('publicado');
         window.location.reload()
         
     } catch (error) {

@@ -3,6 +3,7 @@ import { useAuth } from "../context/authContext";
 import Navbar from "./Navbar.jsx";
 import { createPost } from "../firebase/publicaciones/createPost.js";
 import { getPost } from "../firebase/publicaciones/getPost.js";
+import { delPublication } from "../firebase/publicaciones/delPublication.js";
 
 const Home = () => {
   const { user, loading } = useAuth();
@@ -18,6 +19,7 @@ const Home = () => {
   async function getPostAll() {
     const ResultPublicacion = await getPost();
     setPublicacion(ResultPublicacion);
+
   }
 
   if (loading)
@@ -51,6 +53,23 @@ const Home = () => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = reject;
     });
+
+    const handleDeletePublication = (id) => {
+      publicaciones.forEach((item) => {
+        if(item.id === id) {
+          const confirmar = confirm('The post will be deleted')
+          if(!confirmar){
+            return
+          }
+          delPublication({
+            id: id,
+            email: item.user,
+          })
+        }
+      }); 
+    }
+
+    
 
   return (
     <div className="w-full ">
@@ -97,11 +116,12 @@ const Home = () => {
                   <p></p>
                </div>
               <div className="overflow-hidden bg-cover bg-no-repeat flex flex-col justify-center items-center">
-                <img className="rounded-3xl w-1/2 pt-3" src={myPost.foto} alt="" />
-                <div className="p-2 flex items-start">
+                <img className="rounded-3xl w-3/6 pt-3" src={myPost.foto} alt="" />
+                <div className="p-4 flex items-center gap-4">
                   <span className="text-base text-white dark:text-neutral-200">
                     {myPost.publicacion}
                   </span>
+                  <button className="btn btn-sm btn-warning" onClick={() => handleDeletePublication(myPost.id)}>delete publicacion</button>
                 </div>
               </div>
             </div>

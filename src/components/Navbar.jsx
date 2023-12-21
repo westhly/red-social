@@ -35,7 +35,7 @@ const Navbar = () => {
               </ul>
             </div>
           </div>
-          <a className="btn btn-ghost text-xl">Inicio</a>
+          <a className="btn btn-ghost text-xl sm:text-gray-300 md:text-black">Inicio</a>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
