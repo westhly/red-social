@@ -5,6 +5,7 @@ import { createPost } from "../firebase/publicaciones/createPost.js";
 import { getPost } from "../firebase/publicaciones/getPost.js";
 import { delPublication } from "../firebase/publicaciones/delPublication.js";
 
+
 const Home = () => {
   const { user, loading } = useAuth();
   const [error, setError] = useState("");
@@ -40,6 +41,9 @@ const Home = () => {
       publicacion: form.current.publicacion.value,
       foto: img,
       usuario: user.email,
+      
+
+      
     });
     console.log(result);
     if (result != null) {
@@ -69,6 +73,9 @@ const Home = () => {
       }); 
     }
 
+
+
+   
     
 
   return (
@@ -107,21 +114,47 @@ const Home = () => {
         <div className="grid grid-cols-1 bg-slate-400">
 
           {publicaciones.map((myPost) => (
+            
             <div
-              key={myPost.id}
+              key={myPost.id }
+              
               className="block w-50 rounded-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-10"
             >
-               <div className="flex ">
-                  <img src="" alt="" />
-                  <p></p>
-               </div>
-              <div className="overflow-hidden bg-cover bg-no-repeat flex flex-col justify-center items-center">
-                <img className="rounded-3xl w-3/6 pt-3" src={myPost.foto} alt="" />
-                <div className="p-4 flex items-center gap-4">
-                  <span className="text-base text-white dark:text-neutral-200">
+               
+              <div className="overflow-hidden bg-cover bg-no-repeat flex flex-col ">
+                <div className="justify-between flex mr-5 ">
+
+                <label tabIndex={0} className="btn btn-ghost  avatar mt-5">
+                  <div className="w-10 rounded-full ">
+                        <img alt="" src="" />
+                        
+                      </div>
+                      <span className="">{myPost.usuario}</span>
+                      
+                      
+                    </label>
+                    
+                  {
+                    user.email == myPost.usuario ? 
+                    
+                    <button title="eliminar publicacion" className="w-8 mt-5" onClick={() => handleDeletePublication(myPost.id)}  ><img src="/icons/delete-svgrepo-com.svg" alt="" /></button> 
+
+                    : <></>
+                  }
+
+                  </div>
+
+                   <div className="flex justify-center">
+
+                      <img className="rounded-3xl w-3/6 pt-3 " src={myPost.foto} alt="" />
+
+                   </div>
+
+                  
+                <div className=" m-5  ">
+                  <span className="text-2xl text-dark dark:text-neutral-200">
                     {myPost.publicacion}
                   </span>
-                  <button className="btn btn-sm btn-warning" onClick={() => handleDeletePublication(myPost.id)}>delete publicacion</button>
                 </div>
               </div>
             </div>

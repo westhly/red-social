@@ -1,6 +1,6 @@
 import { firebaseConfig } from "../firebase.js"
 import { initializeApp } from "firebase/app";
-import { reload } from "firebase/auth";
+
 import {addDoc, collection, getFirestore } from "firebase/firestore";
 
  const app = initializeApp(firebaseConfig);
