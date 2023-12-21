@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useLocalStorage } from "./useLocalStorage";
-import Navbar from "./NavBar";
+import Navbar from "./Navbar.jsx";
 import { createPost } from "../firebase/publicaciones/createPost.js";
 import { getPost } from "../firebase/publicaciones/getPost.js";
 
